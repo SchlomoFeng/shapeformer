@@ -1,0 +1,907 @@
+%File formatting-instructions-latex-2025.tex
+%release 2025.0
+documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+usepackage{arxiv_aaai25}  % DO NOT CHANGE THIS
+usepackage{times}  % DO NOT CHANGE THIS
+usepackage{helvet}  % DO NOT CHANGE THIS
+usepackage{courier}  % DO NOT CHANGE THIS
+usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+usepackage{graphicx} % DO NOT CHANGE THIS
+urlstyle{rm} % DO NOT CHANGE THIS
+defUrlFont{rm}  % DO NOT CHANGE THIS
+usepackage[numbers]{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+frenchspacing  % DO NOT CHANGE THIS
+setlength{pdfpagewidth}{8.5in}  % DO NOT CHANGE THIS
+setlength{pdfpageheight}{11in}  % DO NOT CHANGE THIS
+%
+% These are recommended to typeset algorithms but not required. See the subsubsection on algorithms. Remove them if you don't have algorithms in your paper.
+usepackage{algorithm}
+usepackage{algorithmic}
+
+%
+% These are are recommended to typeset listings but not required. See the subsubsection on listing. Remove this block if you don't have listings in your paper.
+usepackage{newfloat}
+usepackage{listings}
+DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off} % DO NOT CHANGE THIS
+lstset{%
+	basicstyle={footnotesizettfamily},% footnotesize acceptable for monospace
+	numbers=left,numberstyle=footnotesize,xleftmargin=2em,% show line numbers, remove this entire line if you don't want the numbers.
+	aboveskip=0pt,belowskip=0pt,%
+	showstringspaces=false,tabsize=2,breaklines=true}
+floatstyle{ruled}
+newfloat{listing}{tb}{lst}{}
+floatname{listing}{Listing}
+%
+% Keep the pdfinfo as shown here. There's no need
+% for you to add the Title and Author tags.
+pdfinfo{
+TemplateVersion (2025.1)
+}
+
+% add packages
+usepackage{hyperref}
+hypersetup{
+	colorlinks=true,
+	linkcolor=cyan,
+	filecolor=blue,      
+	urlcolor=red,
+	citecolor=green,
+}
+usepackage{multirow}
+usepackage{multicol}
+usepackage{subfig}
+usepackage{amssymb}
+usepackage{xcolor}
+usepackage{amsmath}
+usepackage{array}
+renewcommand{algorithmicrequire}{textbf{Input}}
+renewcommand{algorithmicensure}{textbf{Output}}
+newcolumntype{L}[1]{{raggedrightarraybackslash}p{#1}}
+newcolumntype{C}[1]{{centeringarraybackslash}p{#1}}
+newcolumntype{R}[1]{{raggedleftarraybackslash}p{#1}}
+
+% DISALLOWED PACKAGES
+% usepackage{authblk} -- This package is specifically forbidden
+% usepackage{balance} -- This package is specifically forbidden
+% usepackage{color (if used in text)
+% usepackage{CJK} -- This package is specifically forbidden
+% usepackage{float} -- This package is specifically forbidden
+% usepackage{flushend} -- This package is specifically forbidden
+% usepackage{fontenc} -- This package is specifically forbidden
+% usepackage{fullpage} -- This package is specifically forbidden
+% usepackage{geometry} -- This package is specifically forbidden
+% usepackage{grffile} -- This package is specifically forbidden
+% usepackage{hyperref} -- This package is specifically forbidden
+% usepackage{navigator} -- This package is specifically forbidden
+% (or any other package that embeds links such as navigator or hyperref)
+% indentfirst} -- This package is specifically forbidden
+% layout} -- This package is specifically forbidden
+% multicol} -- This package is specifically forbidden
+% nameref} -- This package is specifically forbidden
+% usepackage{savetrees} -- This package is specifically forbidden
+% usepackage{setspace} -- This package is specifically forbidden
+% usepackage{stfloats} -- This package is specifically forbidden
+% usepackage{tabu} -- This package is specifically forbidden
+% usepackage{titlesec} -- This package is specifically forbidden
+% usepackage{tocbibind} -- This package is specifically forbidden
+% usepackage{ulem} -- This package is specifically forbidden
+% usepackage{wrapfig} -- This package is specifically forbidden
+% DISALLOWED COMMANDS
+% nocopyright -- Your paper will not be published if you use this command
+% addtolength -- This command may not be used
+% balance -- This command may not be used
+% baselinestretch -- Your paper will not be published if you use this command
+% clearpage -- No page breaks of any kind may be used for the final version of your paper
+% columnsep -- This command may not be used
+% newpage -- No page breaks of any kind may be used for the final version of your paper
+% pagebreak -- No page breaks of any kind may be used for the final version of your paperr
+% pagestyle -- This command may not be used
+% tiny -- This is not an acceptable font size.
+% vspace{- -- No negative value may be used in proximity of a caption, figure, table, section, subsection, subsubsection, or reference
+% vskip{- -- No negative value may be used to alter spacing above or below a caption, figure, table, section, subsection, subsubsection, or reference
+
+setcounter{secnumdepth}{2}%May be changed to 1 or 2 if section numbers are desired.
+
+% The file aaai25.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+renewcommand{thefootnote}{fnsymbol{footnote}}
+
+
+% Title
+
+% Your title must be in mixed case, not sentence case.
+% That means all verbs (including short verbs like be, is, using,and go),
+% nouns, adverbs, adjectives should be capitalized, including both words in hyphenated terms, while
+% articles, conjunctions, and prepositions are lower case unless they
+% directly follow a colon or long dash
+title{BearLLM A Prior Knowledge-Enhanced Bearing Health Management Framework with Unified Vibration Signal Representation}
+author{
+    %Authors
+    % All authors must be in the same font size and format.
+    Haotian Pengtextsuperscript{rm 1, 2, 3, 4}equalcontrib,
+    Jiawei Liutextsuperscript{rm 1, 2, 3}equalcontrib,
+    Jinsong Dutextsuperscript{rm 1, 2 ,3},
+    Jie Gaotextsuperscript{rm 1, 2, 3}footnotemark[2],
+    Wei Wangtextsuperscript{rm 1, 2, 3}footnotemark[2]
+    % Written by AAAI Press Stafftextsuperscript{rm 1}thanks{With help from the AAAI Publications Committee.}
+    % AAAI Style Contributions by Pater Patel Schneider,
+    % Sunil Issar,
+    % J. Scott Penberthy,
+    % George Ferguson,
+    % Hans Guesgen,
+    % Francisco Cruzequalcontrib,
+    % Marc Pujol-Gonzalezequalcontrib
+}
+affiliations{
+    textsuperscript{rm 1} Shenyang Institute of Automation, Chinese Academy of Sciences
+    textsuperscript{rm 2} Liaoning Liaohe Laboratory 
+    textsuperscript{rm 3} Key Laboratory on Intelligent Detection and Equipment Technology of Liaoning Province
+    textsuperscript{rm 4} University of Chinese Academy of Sciences
+    {{penghaotian, liujiawei, jsdu, gaojie, wangwei2}@sia.cn}
+
+    % %Afiliations
+    % textsuperscript{rm 1}Association for the Advancement of Artificial Intelligence
+    % % If you have multiple authors and multiple affiliations
+    % % use superscripts in text and roman font to identify them.
+    % % For example,
+
+    % % Sunil Issartextsuperscript{rm 2}, 
+    % % J. Scott Penberthytextsuperscript{rm 3}, 
+    % % George Fergusontextsuperscript{rm 4},
+    % % Hans Guesgentextsuperscript{rm 5}
+    % % Note that the comma should be placed after the superscript
+
+    % 1101 Pennsylvania Ave, NW Suite 300
+    % Washington, DC 20004 USA
+    % % email address must be in roman text type, not monospace or sans serif
+    % proceedings-questions@aaai.org
+%
+% See more examples next
+}
+
+
+% REMOVE THIS bibentry
+% This is only needed to show inline citations in the guidelines document. You should not need it and can safely delete it.
+usepackage{bibentry}
+% END REMOVE bibentry
+
+begin{document}
+
+maketitle
+
+begin{abstract}
+    
+    % v1 % Bearing health management is crucial for preventing accidents and minimizing economic losses. To enable a range of health management tasks, we first introduce Large Language Models (LLMs) capable of generating on-demand responses tailored to specific user needs. To align vibration signals with textual vectors, we first convert data from disparate distributions into a unified representation. We design a prior knowledge enhancement method that samples data with varying lengths based on sampling frequency and performs fault identification based on the difference between test signals and normal signals. Using Discrete Cosine Normalization (DCN), we obtain length-identical, dimensionally aligned data input while minimizing signal distortion. A Multi-Scale Channel Attention Network (MSCAN) is designed as a feature extractor. Pre-trained feature extractors and pre-designed alignment weights transform vibration signals into textual vectors. Fine-tuning of LLM and alignment parameters is achieved through LoRA technology, further enhancing response quality. Experimental validation demonstrates that our method surpasses existing state-of-the-art (SOTA) accuracy on unified datasets, and the generated text responses outperform traditional methods across multiple health management tasks involving diverse categories. 
+    
+    %v2 We propose BearLLM, a novel bearing health management framework, which leverages prior knowledge enhancement to construct a unified vibration signal representation, enabling the Large Language Model (LLM) to perform multiple tasks using vibration signals from multiple sources. Specifically, we sample vibration signals based on sampling rate information and incorporate normal signal templates as additional input. Discrete Cosine Normalization (DCN) ensures equal-length, dimensionally aligned inputs. A multiscale channel attention network (MSCAN) extracts features. The pre-trained MSCAN and predefined alignment layer convert vibration signals into semantic vectors. Fine-tuning via Low-Rank Adaptation (LoRA) enhances response quality. We construct the extensive multimodal bearing (MBHM) health management dataset, a large-scale collection of vibration signals paired with textual data. In particular, our method achieves state-of-the-art accuracy in the MBHM dataset. We provide code to encourage further exploration, application, and development of our innovative framework. (GitHub)
+
+    We propose a bearing health management framework leveraging large language models (BearLLM), a novel multimodal model that unifies multiple bearing-related tasks by processing user prompts and vibration signals. Specifically, we introduce a prior knowledge-enhanced unified vibration signal representation to handle various working conditions across multiple datasets. This involves adaptively sampling the vibration signals based on the sampling rate of the sensor, incorporating the frequency domain to unify input dimensions, and using a fault-free reference signal as an auxiliary input. To extract features from vibration signals, we first train a fault classification network, then convert and align the extracted features into word embedding, and finally concatenate these with text embedding as input to an LLM. To evaluate the performance of the proposed method, we constructed the first large-scale multimodal bearing health management (MBHM) dataset, including paired vibration signals and textual descriptions. With our unified vibration signal representation, BearLLM using one set of pre-trained weights achieves state-of-the-art performance on nine publicly available fault diagnosis benchmarks, outperforming specific methods designed for individual datasets. We provide a dataset, our model, and code to inspire future research on building more capable industrial multimodal models (href{httpsgithub.comSIA-IDEBearLLM}{httpsgithub.comSIA-IDEBearLLM}).
+
+end{abstract}
+
+section{Introduction}
+renewcommand{thefootnote}{fnsymbol{footnote}}
+footnotetext[2]{Corresponding author.}
+renewcommand{thefootnote}{arabic{footnote}}
+%Prognostics and Health Management (PHM) seeks to shift maintenance strategies from reactive to proactive approaches cite{omriIndustrialDataManagement2020, compareGeneralModelLifecycle2022, wangBibliometricAnalysisPrognostics2022, zhangPrognosticsHealthManagement2022}. Bearings are a critical focus in PHM due to their prevalence, high failure rates, well-understood fault mechanisms, and significant impact on equipment reliability cite{pengDigitalTwinRolling2022, xiaoNovelJointTransfer2022a, ruanCNNParameterDesign2023a}. Existing strategies for bearing health management typically need the development of specialized methodologies for distinct datasets and specific tasks (see Fig. ref{figframework_compare}.a), hindering plug-and-play in practical scenarios. Large Language Models (LLMs) offer a potential solution by unifying disparate tasks and generating human-understandable reports cite{goswamiCoPLContextualPrompt2024, guAnomalyGPTDetectingIndustrial2024}. However, related research on bearing health management is limited cite{liChatGPTlikeLargescaleFoundation2024}. A key challenge is establishing a unified representation of vibration signals acquired under various operating conditions cite{BFM}, enabling the mapping into the word embedding space for LLM processing. 
+
+%Current research on unifying feature distributions focuses on domain adaptation and generalization. Domain adaptation utilizes transfer learning, applying weights from a labeled source dataset to a target dataset with different characteristics cite{wuAdversarialDomainAdaptation2022, zhangSupervisedContrastiveLearningBased2022}. However, this approach is impractical for real-world industrial settings with numerous bearings that require individual transfer training cite{liChatGPTlikeLargescaleFoundation2024}. Domain generalization seeks to extract domain-invariant features during training for improved performance on unseen data distributions cite{liDomainGeneralizationRotating2020, zhengDeepDomainGeneralization2021, chenAdversarialDomainInvariantGeneralization2022a}. While promising, it often involves complex data preprocessing and augmentation, hindering practical implementation. Crucially, these methods haven't addressed the reliance on raw vibration signals as the sole input.
+
+Bearings are the core components of mechanical rotating equipment but have high failure rates due to complex operational and environmental conditions cite{Wang2020IntelligentBearing}. Bearing health management (e.g., anomaly detection, fault diagnosis, and maintenance recommendations) is of great practical significance in industrial safety production to reduce economic losses and maintenance costs cite{pengDigitalTwinRolling2022, xiaoNovelJointTransfer2022a, ruanCNNParameterDesign2023a}.
+
+Current bearing health management frameworks rely on designing specialized methods for different working conditions and tasks, as shown in Fig. ref{figframework_compare} (a).
+To apply specific methods to complex real-world industrial scenarios, domain adaptation, and generalization have attracted widespread attention. Domain adaptation enables a model trained on one source domain to perform well on different but related target domains by reducing the domain shift or discrepancy cite{wuAdversarialDomainAdaptation2022, zhangSupervisedContrastiveLearningBased2022}, but it suffers from low accuracy when the source and target domains are category-inconsistent (e.g., transitioning from working condition $C_1$ with four fault types to $C_2$ with five types). Domain generalization aims to extract domain-invariant features to improve performance on unseen domain cite{liDomainGeneralizationRotating2020, zhengDeepDomainGeneralization2021, chenAdversarialDomainInvariantGeneralization2022a}, but it is often constrained to a limited number of working conditions with small differences, e.g., fewer than ten working conditions in cite{chenAdversarialDomainInvariantGeneralization2022, linGeneralizedMAMLFewshot2023}. 
+These purely data-driven methods often fail to strike an optimal balance between high accuracy and strong generalization for fault diagnosis. 
+
+
+begin{figure}
+    centering
+    includegraphics[width=3.3in]{figuresintro.pdf}
+    caption{Comparison of existing bearing health management frameworks cite{chaleshtoriNovelBearingFault2024,niDatadrivenBearingHealth2024} with our proposed approach. Our BearLLM replaces the complex operations of designing methods tailored to different conditions and tasks.}
+    label{figframework_compare}
+    vspace{-0.2cm}
+end{figure}
+
+%Based on the prior knowledge ignored in existing methods, we build a novel unified vibration signal representation to handle various working conditions in multiple datasets. Specifically, we sample the vibration signal with a fixed duration using the sensor sampling rate. Since the duration of each sample is equal, after conversion to the frequency domain, the corresponding positions in the result sequence represent the components of the same frequency. This enables the use of a fault-free reference signal as an auxiliary input and the bit-wise subtraction to obtain the residual of each frequency component. Based on this prior knowledge-enhanced unified representation, the fault features extraction source for health management tasks is transformed from the raw vibration signal to the residual in the frequency domain. This transformation not only simplifies health management, thereby improving accuracy but also reduces the correlation between the extracted features and the working condition, thereby improving generalization. 
+
+In this paper, we propose a prior knowledge-enhanced bearing large language model (BearLLM), which can unify multiple bearing health management tasks over hundreds of different working conditions from multiple datasets, as shown in Fig. ref{figframework_compare} (b). 
+To handle various working conditions, we introduce a prior knowledge-enhanced unified vibration signal representation. Unlike most fault diagnosis methods that use fixed-length input segments, we sample vibration signals as variable-length but fixed-duration segments. These duration-consistent segments are then converted to the frequency domain and are aligned. We further utilize a fault-free reference signal as a prior input, eliminating the need for complex mechanism analysis for various bearing designations cite{zhengDeepDomainGeneralization2021}.
+
+Specifically, we first design a fault classification network (FCN) to extract fault features based on the differences in frequency components between the query signal segment and the fault-free reference signal segment. 
+This new frequency-based feature extraction paradigm for bearing fault diagnosis is more efficient (i.e., faster convergence and higher accuracy) and achieves stronger generalization, compared to previous methods that extract fault features directly from vibration signals.
+The extracted features are then transformed and aligned into word embedding, which is subsequently connected to user text embedding as inputs to the LLM.
+To evaluate the performance of the proposed method, we construct the first large-scale multimodal bearing health management (MBHM) dataset, including paired vibration signals and textual descriptions. Although the vibration signals from the nine public datasets differ significantly in distribution, BearLLM with a set of pre-trained weights achieves state-of-the-art performance using a unified vibration signal representation, outperforming specialized methods designed for individual datasets. The contributions of this paper are summarized as follows
+begin{itemize}
+    item We propose a novel bearing multimodal large language model, unifying multiple bearing health management tasks by aligning vibration signals and textual prompts.
+    item We propose a prior knowledge-enhanced unified vibration signal representation to handle various working conditions from multiple datasets.
+    item We construct the first large-scale multimodal dataset for bearing health management (MBHM), involving vibration signals with associated textual descriptions. 
+    item  Experimental results show that our BearLLM outperforms state-of-the-art fault diagnosis methods on nine publicly available benchmarks.  % fault diagnosis benchmarks
+end{itemize}
+
+iffalse
+%v0
+We propose prior knowledge-enhanced BearLLM (Fig. ref{figframework_compare} (b)), a unified framework capable of performing multiple tasks, e.g., anomaly detection, fault diagnosis, maintenance recommendations, potential risk analysis, without requiring additional optimization for individual working conditions. Specifically, we introduce a unified vibration signal representation, which deviates from using fixed-length input segments by leveraging sampling rate information to extract segments of predetermined duration from raw vibration signals. Discrete Cosine Normalization (DCN) converts these variable-length segments into a fixed input length suitable for machine learning models. Due to the constant sampling duration before the transform, corresponding positions in the sequence represent the same frequency. This allows the incorporation of fault-free signals as prior knowledge. Fault identification becomes a comparison between query and fault-free reference signals, eliminating traditional feature extraction from raw vibration signals. This simplification enhances accuracy, and generalization, and reduces the correlation between extracted features and working conditions. 
+
+Furthermore, we leverage LLM to generate responses tailored to user requests and vibration signals. To our knowledge, this research represents the first exploratory effort to embed vibration signals in the word embedding space within the health management domain. As shown in Fig. ref{figframework}, we concatenate user instructions with vibration signals in the word embedding space and input them into an LLM to obtain responses. Specifically, we design a fault classification network (FCN) and pre-train it to extract features relevant to fault modes. We further initialize the weights of the alignment layer with word embedding generated from a predefined keyword list. For LLM selection, we opt for the smaller Qwen2 cite{qwen} and fine-tune it using LoRA cite{hu2021loralowrankadaptationlarge}. This approach enables faster response times, lower resource consumption, and comparable response quality compared to larger-scale models cite{schick2021itsjustsizematters}.
+fi
+
+
+iffalse
+% v0
+In summary, the key contributions of this work are threefold
+1. textbf{Development of a novel signal acquisition and frequency domain preprocessing method} This approach achieves distribution alignment before model input, eliminating the need for transfer training during application. 
+2. textbf{Proposal of a fault pattern recognition technique based on discrepancies between test samples and known healthy signals}  This significantly reduces the complexity of the fault diagnosis problem and potentially enhances the generalization.
+3. textbf{First-time utilization of an LLM for multi-task responses in the operational maintenance domain} This approach lowers the barrier to entry for personnel lacking specialized expertise and avoids the need for separate decoder units tailored to specific tasks.
+fi
+
+begin{figure}
+    centering
+    includegraphics[width=7in]{figuresframework.pdf}
+    caption{Architecture of our proposed BearLLM. Given a query vibration signal segment $X_v$ and user instruction $X_t$ as input, the model retrieves a fault-free vibration signal segment $tilde{X}_v$ with similar working conditions from the database as a reference. Two vibration signals are converted into a unified representation through DCN. A feature encoder identifies fault-related residuals between the two signals. The alignment layer converts these features into the word embedding $H_V$. Finally, an LLM is utilized with the user text embedding $H_T$ to generate multi-task natural language responses, where $n_t$ represents the length of the encoded text embedding.}
+    label{figframework}
+    vspace{-0.2cm}
+end{figure}
+
+section{Related Works}
+
+textbf{Multiple Working Condition} Fault diagnosis under various working conditions from multiple datasets presents a challenge due to the heterogeneity of collected signals arising from variations in the test rigs, sensors, and environment, making it difficult to obtain unified features cite{wenNovelDeepClustering2023}. Existing domain adaptation methodscite{TCNN, wanNovelDeepConvolution2022,  maDigitalTwinassistedEnhanced2023, huoEnhancedTransferLearning2023} typically involves training a model under known working conditions (source domain) and subsequently transferring knowledge to an unknown working condition (target domain). However, these approaches still necessitate individual transfer fine-tuning for each working condition in practice, hindering its ability to generalize across multiple scenarios. Domain generalization methods leverage training on multiple working conditions and aim to align the feature distributions of different domains through the design of network architectures and loss functions cite{jiaDeepCausalFactorization2023, zhuDomainAdaptationMultiAdversarial2023, houDiagnosisformerEfficientRolling2023}. However, these approaches often rely on complex data preprocessing and augmentation techniques to help models learn fault features from vibration signals.
+
+textbf{Multiple Tasks} Data-driven machinery health management have gained significant traction cite{trabelsiFMECABasedRiskAssessment2020}.The concept of health management usually involves multiple tasks cite{omriAdaptedPHMApproach2021, zioPrognosticsHealthManagement2022}, including anomaly detection, fault diagnosis, degradation prediction, maintenance decision-making, etc. LLMs such as ChatGPT-4 cite{openaiGPT4TechnicalReport2024} have demonstrated exceptional capabilities across a wide range of tasks. The emergence of open-source foundational models like LLaMA 3 cite{llama3modelcard1} and Qwen 2 cite{qwen} have further empowered researchers in various disciplines to integrate these models into their own applications. In the aviation domain, citet{liuJointKnowledgeGraph2024} applied generalized linear models to achieve multiple tasks, including assembly guidance and assembly error identification for aircraft engines. In the petroleum industry, citet{eckrothAnsweringNaturalLanguage2023} designed a question-answering system based on LLM and knowledge graph, enabling retrieval of functionalities such as stratigraphy data and geological age determination. However, research integrating multiple tasks using LLMs for bearing health management remains limited cite{liChatGPTlikeLargescaleFoundation2024}. 
+
+section{A Multimodal Bearing Health Management Dataset}
+
+Although several bearing-related datasets in Tab. ref{tabdataset_compare} are available, they generally collect vibration signals on a single test rig, have a limited number of working conditions, and have no corresponding textual descriptions for training LLM. We have constructed a large-scale publicly multimodal dataset for bearing health management (MBHM).
+
+begin{table}[H]
+small
+    centering
+    begin{tabular}{L{0.95cm}C{1.55cm}R{0.9cm}R{0.8cm}R{1.05cm}R{0.6cm}}
+    hline
+        Dataset & Sample Rate (kHz) & Condi-tions$^{}$ & Fault Types & Time (s) & Text  hline
+        CWRU & 12  48 & 12 & textbf{10} & 3932 & $times$   
+        DIRG & 51.2 & 102 & 7 & 7140 & $times$   
+        HIT & 20 & 40 & 3 & 9648 & $times$   
+        IMS & 20 & 16 & 7 & underline{46480} & $times$   
+        JNU & 100 & 45 & 4 & 3600 & $times$   
+        JUST & 50 & 36 & 4 & underline{43986} & $times$   
+        MFPT & 48.8  97.6 & 1 & 3 & 78 & $times$  
+        PU & 64 & 4 & 5 & 7316 & $times$   
+        XJTU & 25.6 & 6 & textbf{10} & 13336 & $times$   
+        textbf{MBHM} & textbf{12 textasciitilde 100} & textbf{262} & textbf{10} & textbf{135516} & textbf{checkmark}  hline
+        multicolumn{6}{r}{$^{}$ scriptsize The same working conditions represent the same load, speed, and sensor.}
+    end{tabular}
+    caption{Comparison of different datasets. Our MBHM dataset has the largest number of working conditions, the most complete fault types, and the longest time, paired textual promptsresponses.}
+    label{tabdataset_compare}
+    vspace{-0.2cm}
+end{table}
+
+begin{figure}[t]
+    centering
+    includegraphics[width=3.3in]{figuresdataset.pdf}
+    caption{Sample case of our MBHM dataset, includes vibration signal $X_v$, fault label $L_v$, working condition $C$, the specific task prompt text $X_t$, and the response text $L_t$.}
+    label{figdataset}
+    vspace{-0.2cm}
+end{figure}
+The MBHM contains 135,516 pairs of vibration signal segments and fault types, and 542,064 pairs of text cues and responses, of which each sample is shown in Fig. ref{figdataset}, contains a vibration signal, a fault label, an operating condition id, a user prompt, and a text response, ie, $(X_v, L_v, C, X_t, L_t)in mathrm{MBHM}$.
+Our dataset contains 262 working conditions collected from nine publicly accessible datasets, i.e., CWRU cite{CWRU1}, DIRG cite{DIRG}, HIT cite{HIT}, IMS cite{IMS}, JNU cite{JNU1}, JUST cite{JUST}, MFPT cite{MFPT1}, PU cite{PU}, XJTU cite{XJTU}. For each vibration signal, we have four different tasks, i.e., anomaly detection, fault diagnosis, maintenance recommendations, and potential risk analysis by generating text responses using ChatGPT cite{openaiGPT4TechnicalReport2024}. Detailed methodologies for dataset construction are provided in Appendix A.3. Our MBHM dataset contains the following features
+begin{itemize}
+    item textbf{Multi-modal} Each vibration signal is paired with four text prompts and responses, supporting the training and development of multimodal multi-task models.
+    item  textbf{Multiple working conditions} Our dataset covers a wider range of working conditions, more accurately modeling real-world industrial production scenarios.
+    %item  textbf{Multiple data sources} Different designations of sensors are used at different sampling rates for signal acquisition.
+    %textbf{Number of samples} A larger number of samples reduces the impact that specific harmful samples have on the training process.
+    % item textbf{Diverse Working Conditions} Inclusion of vibration signals under textbf{262 working conditions} from nine datasets enhances the realism and demands greater generalization from identification algorithms.
+    %item textbf{Sample Length} Unlike datasets with fixed-length input segments, each MBHM sample maintains a consistent duration achieved through sampling rate information.
+    % item textbf{Search Index} Condition information such as rotational speed and load is abstracted into indices for efficient retrieval of fault-free signals with matching conditions. This addresses the limitation of some datasets lacking specific numerical values for working conditions.
+end{itemize}
+
+section{Method}
+
+% BearLLM is a novel framework for bearing health management designed to unify diverse tasks using vibration signals from various working conditions. We introduce a prior knowledge enhancement technique for a unified vibration signal representation. A pre-trained feature encoder and alignment layer align vibration signals with their corresponding textual descriptions. The incorporation of LLM and fine-tuning enables the generation of understandable multi-task outputs.
+
+In this section, we propose BearLLM, a novel multimodal model that unifies multiple bearing-related tasks. To handle various working conditions across multiple datasets, we introduce a prior knowledge-enhanced unified vibration signal representation in Section 4.1. The unified vibration signal is fed to a fault classification network to extract features in Section 4.2. We convert and align the extracted features into word embedding, and finally concatenate these with text embedding as input to an LLM in Section 4.3.
+
+subsection{Prior Knowledge-Enhanced Unified Vibration Signal Representation}
+BearLLM aims to manage multiple bearing-related tasks across hundreds of working conditions. 
+The basis for this is to build a unified vibration signal representation, involving adaptively sampling the vibration signal segments based on the sensor sampling rate, incorporating the frequency domain to unify input dimensions, and using a fault-free reference signal to calculate residual as auxiliary inputs to improve data utilization efficiency. 
+
+%To perform health management tasks for vibration signals under different working conditions with LLMs, we establish a prior knowledge-enhanced unified representation.
+
+subsubsection{Adaptive Sampling}
+
+iffalse
+% 放到附录
+begin{figure}
+    centering
+	subfloat[Regular Sampling]{includegraphics{figuressampling_regular.pdf}}
+	subfloat[Ours]{includegraphics{figuressampling_our.pdf}}
+    caption{Differences Between Our Sampling Method and Regular Methods}
+    label{figsampling_strategy}
+end{figure}
+fi
+%Conventional methods disregard the sampling rate and obtain fixed-length segments as input, resulting in shorter durations for signals with higher sampling rates. The same signal may display varying characteristics depending on the sampling rate. 
+
+To monitor various mechanical devices across different working conditions and industrial scenarios, vibration sensors are deployed with varying designations and sampling rates. However, most fault diagnosis methods cite{zhuDomainAdaptationMultiAdversarial2023,dongRollingBearingIntelligent2024} use fixed-length signal segments in the time domain as inputs, where the fault frequency components in the inputs deviate from their original intrinsic values and vary with the sampling rate, hindering accurate fault diagnosis.
+Instead of sampling fixed-length signal segments, we adaptively sample vibration signals as variable-length but fixed-duration segments using prior knowledge of the sensor sampling rate.
+We extract the $m$-th query signal segment $X_v in mathbb{R}^{1 times s}$ from the original signal $X_o$ by
+begin{equation}
+    X_v = X_o[ms, (m+1)s],
+    label{eqsampling}
+end{equation}
+where $s$ denotes the sampling rate of the sensor and controls the length of the $X_v$. 
+%For each query segment ($x_v$), the durations are equal and the intrinsic frequencies of signals are aligned in the frequency domain by using the sensor sampling rate.
+
+subsubsection{Frequency-domain Input Alignment} 
+After adaptive sampling, each query segment ($X_v$) has an equal duration, and the frequencies of $X_v$ are aligned. However, varying lengths of $X_v$ (due to different sampling rates) result in different numbers of frequency components, making them unsuitable for input to the network.
+We design a discrete cosine normalization (DCN) that consists of converting the vibration signal to the frequency domain using the discrete cosine transform (DCT), unifying the number $n_f$ of frequency components using a pad or cut, and standardizing the amplitude using the normalization $mathcal{N}$. The normalized frequency representation $F_v in mathbb{R}^{1 times n_f}$ is obtained by
+begin{align}
+F_v & = left{begin{matrix}
+  mathcal{N}(mathrm{DCT}(X_v)[0, n_f]), & mathrm{if}  sge n_f 
+  mathcal{N}(mathrm{DCT}(X_v)cup [0]_{n_f-s}), & mathrm{if}  s n_f
+end{matrix}right.
+label{eqprepocess_signal}
+end{align}
+Signals with sampling rates below $n_f$ are zero-padded, while those exceeding $n_f$ are cut. To balance computational resources and fault classification accuracy, we empirically set $n_f = 24000$ (more detail in Tab. ref{tabtarget_length}).
+To enhance training stability, the amplitude of the frequency sequence is normalized to $[-1,1]$,
+begin{equation}
+    mathcal{N}(x)=betafrac{sqrt{n}x}{x_2},
+    label{eqnormalize_signal}
+end{equation}
+where $beta$ is a scaling factor and is set to 0.01 by statistically analyzing our MBHM dataset. %First, the energy value is standardized to 1 by calculating its $L2$ norm with frequency components count $n$. Finally, through $beta$ which is set as a constant value of 0.01 determined through statistics, the amplitudes are constrained within the range of -1 to 1, enhancing training stability.
+
+
+
+
+% The computational efficiency of DCT makes it widely used in signal processing. Compared to the Fast Fourier Transform (FFT), it concentrates more data in the low-frequency region, minimizing the impact of the cut on signal integrity. Additionally, its real-valued computation is advantageous for deep learning applications. 
+
+subsubsection{Fault-free Reference Signal}
+To eliminate distributional differences from different inputs under various operating conditions, we introduce fault-free signals as reference signals.
+1) In practical use, the reference signal segment $tilde{X}_v$ can be collected and saved when the equipment is working properly, such as after factory acceptance or maintenance; 2) in training on the MBHM dataset, $tilde{X}_v$ is acquired by
+begin{equation}
+    begin{aligned}
+        tilde{X}_v &sim left {X_v^(X_v^,L_v^,C^,X_t^,L_t^)in mathrm{MBHM}, right. 
+        &quad left. L_v^=0, C^=C right }.
+    end{aligned}
+    label{eqchoice_normal}
+end{equation}
+This indicates that $tilde{X}_v$ is selected when a signal ($X_v^$) of our MBHM dataset is fault-free (i.e., $L_v^=0$) and has the same working conditions as ${X}_v$ (i.e., $C^=C$).
+
+We combine the query frequency signal ($F_v$), the fault-free frequency signal ($tilde{F}_v$), and the residual frequency signal ($F_{res}=F_v-tilde{F}_v$) as unified vibration signal representation,
+begin{equation}
+    R_v=[F_v,tilde{F}_v, F_{res}].
+    label{eqinput_sample}
+    %vspace{-1em}
+end{equation}
+
+% Once $tilde{x}_v$ is acquired, both channels of $r_v$ are processed via DCN. Subsequently, the data of the two channels naturally align in the frequency domain, which enables the model to easily identify frequency-domain variations.
+
+subsection{Feature extraction}
+
+begin{algorithm}
+    caption{Training Algorithm}
+    label{algotraining}
+    begin{algorithmic}
+    REQUIRE $theta_E, theta_C, theta_A, theta_L$ the weights of feature encoder, linear classification layer, alignment layer, and LLM in our BearLLM; $X_v, L_v, X_t, L_{t}$ the vibration signal, fault label, prompt text, and response text from MBHM dataset 
+    ENSURE The optimal parameters of BearLLM $theta_E^, theta_A^, theta_L^$
+        
+        STATE textbf{Step 1 Pre-training FCN}
+        FOR{$e leftarrow 1$ to 50 epoches}
+        STATE $R_v leftarrow X_v$
+        $quadtriangleleft$
+        get unified representation by Eq. ref{eqinput_sample}
+        STATE $P = mathrm{FCN}(R_v)$
+        STATE $theta_{E}^{},theta_C^  stackrel{+}{longleftarrow} - nabla_{theta_{E},theta_C} (mathrm{CE}(P, L_v))$ $quadtriangleleft$ cross-entropy
+        % STATE Update learning rate $lr$
+        % STATE Early stop textbf{if} $lr10^{-7}$
+        ENDFOR
+
+        STATE textbf{Step 2 Fine-tuning BearLLM}
+        STATE Init. $theta_A$ by Eq. ref{eqget_weight}
+        FOR{$e leftarrow 1$ to 20 epoches}
+            STATE $Y = mathrm{BearLLM}(X_t, X_v)$
+            STATE $theta_A^, theta_L^ leftarrow mathrm{PEFT}(Y, L_t)$
+        ENDFOR
+
+
+        RETURN $theta_E^, theta_A^, theta_L^$
+    end{algorithmic}
+
+end{algorithm}
+
+To extract the features of vibration signals, we propose a fault diagnosis network (FCN) containing a feature encoder parameterized by $theta_E$ and a linear classification layer parameterized by $theta_C$, as shown in Fig. ref{figMSCAN}.
+We extract features from the unified vibration signal representation ($R_v$) using three separate convolutional layers with large kernels cite{WDCNN} and no weight sharing. We then transform features by three multiscale channel attention blocks (MSCAB) where the multiscale features are fused using the channel attention module (CAM) cite{wooCBAMConvolutionalBlock2018a}. Finally, we use two linear layers for fault classification.
+
+Our FCN takes unified representation ($R_v$) as input and outputs the fault type ($P$). 
+The shape of $P$ is $[1, gamma]$ and  $gamma$ denotes the number of fault types.
+We use cross-entropy loss for training with fault label $L_v$ as ground truth.
+%We train FCN with unified vibration signal representation $r_v$ as input and fault type $L_v$ as ground truth, using cross-entropy loss for fault classification. 
+The training procedure is described in Algo. ref{algotraining}. The well-trained feature encoder weights ($theta_E^$) of FCN are then used and frozen in BearLLM (see Fig. ref{figframework}), while the classifier weights ($theta_C^$) of FCN are used to initialize the alignment layer.
+
+%In MSCAB, to concatenate the inputs with multi-scale features, we apply an additional convolution for tuning the number of channels and length.
+
+% After DCN, the corresponding positions of the two channels in $r_v$ represent the components of the same frequency. By bit-wise subtraction, the residual of each frequency component is easy to get. 
+%Existing research cite{WDCNN} indicates that using wider convolutional kernels in the first layer can improve precision. Given that the three channels exhibit distinct feature distributions, we utilized three separate wide convolutional layers without weight sharing. %Notably, the query and residual channels are assigned with more channels. 
+
+%The multi-scale features are transformed by employing convolution with three different kernel sizes and extending to more scales through multi-layer stacking.
+
+
+
+
+begin{figure}
+    centering
+    includegraphics[width=3.3in]{figuresFCN.pdf}
+    caption{Structure of our proposed FCN. In the feature encoder, three wide convolutions are first used to extract main features, followed by three MSCAB blocks to transform and fuse multi-scale features for fault classification. The pre-trained FCN is used to initialize the feature extractor and alignment layer of BearLLM.}
+    label{figMSCAN}
+        vspace{-0.2cm}
+end{figure}
+
+
+begin{table}[htbp]
+small
+    centering
+    resizebox{textwidth}{!}{
+    begin{tabular}{p{1.5cm}lcccccccccc}
+    hline
+        multicolumn{2}{c}{Method} &  CWRU &  DIRG &  HIT &  IMS &  JNU &  JUST &  MFPT &  PU &  XJTU & MBHM  hline
+        multicolumn{12}{l}{Train and Test on Individual Datasets}  hline
+        multirow{3}{1.5cm}{Methods for specific conditions} & WDCNN & 71.60 & 41.23 & 94.42 & 96.03 & 55.71 & 49.67 & 75.00 & 75.84 & 95.99 & -  
+        & TCNN & 81.56 & 39.31 & 91.03 & 91.48 & 70.37 & 48.83 & 87.50 & 72.76 & 94.36 & - 
+        & QCNN & 80.55 & 46.58 & 96.04 & 95.46 & 51.06 & 48.67 & 87.50 & 78.46 & 96.49 & -  hline
+        multicolumn{12}{l}{Train on MBHM Dataset and Test on Individual Datasets}  hline
+        multirow{6}{1.5cm}{Methods for specific conditions} & WDCNN & 34.22 & 25.01 & 72.56 & 93.60 & 40.20 & 41.38 & 37.50 & 56.82 & 88.98 & 65.79  
+        & TCNN & 15.98 & 14.98 & 54.05 & 91.87 & 29.91 & 26.43 & 25.00 & 51.69 & 85.00 & 57.20  
+        & QCNN & colorbox{lightgray}{48.01} & colorbox{lightgray}{27.54} & colorbox{lightgray}{78.38} & colorbox{lightgray}{94.23} & 43.99 & 42.56 & colorbox{lightgray}{62.50} & colorbox{lightgray}{63.06} & colorbox{lightgray}{90.26} & 67.87  %cline{2-12}
+        & WDCNN+DCN & 80.35 & 68.76 & 96.51 & 96.39 & 90.87 & 77.78 & 62.50 & 84.86 & 95.66 & 87.60  
+        & TCNN+DCN & 48.40 & 28.19 & 68.60 & 92.41 & 46.98 & 48.19 & 12.50 & 68.49 & 90.96 & 68.98  
+        & QCNN+DCN & underline{95.55} & underline{91.32} & underline{99.41} & 97.36 & underline{98.96} & underline{85.91} & underline{100.00} & 92.32 & underline{98.27} & 87.60  hline
+        multirow{6}{1.5cm}{Methods for cross conditions} & MagNet & 12.07 & 15.80 & 42.50 & 91.96 & 29.09 & 27.31 & 25.00 & 30.68 & 85.23 & 55.54  
+        & BearingFM & 41.18 & 14.29 & 33.33 & 92.18 & colorbox{lightgray}{48.39} & colorbox{lightgray}{58.78} & 33.33 & 54.22 & 88.45 & colorbox{lightgray}{75.18}  
+        & MagNet+DCN & 95.31 & 79.94 & 89.78 & 88.79 & 94.95 & 65.85 & 87.50 & 74.43 & 95.85 & 81.18  
+        & BearingFM+FCN & 81.16 & 20.69 & 80.00 & underline{97.74} & 81.18 & 83.26 & 25.00 & underline{95.31} & 95.17 & underline{90.07}  %cline{2-12}
+        & multirow{2}{1.5cm}{textbf{Ours}} & textbf{100.00} & textbf{99.72} & textbf{99.90} & textbf{99.39} & textbf{99.44} & textbf{98.16} & textbf{100.00} & textbf{99.41} & textbf{98.79} & textbf{99.02} 
+        & & textcolor{red}{(+108%)} & textcolor{red}{(+262%)} & textcolor{red}{(+28%)} & textcolor{red}{(+6%)} & textcolor{red}{(+106%)} & textcolor{red}{(+67%)} & textcolor{red}{(+60%)} & textcolor{red}{(+58%)} & textcolor{red}{(+10%)} & textcolor{red}{(+32%)}  hline
+    end{tabular}}
+    caption{Accuracy comparison with existing methods. ``+DCN'' denotes the addition of DCN to the original method, while ``+FCN'' indicates the replacement of the network of the original method with FCN, ``(+108%)'' represents a relative improvement from 48.01% to 100%. Our approach not only surpasses the SOTA accuracy on the MBHM dataset but also achieves results superior to those obtained from models trained specifically for individual datasets. The DCN and FCN components demonstrate broad applicability across diverse scenarios.}
+    label{tabacc_compare}
+    vspace{-0.2cm}
+end{table}
+
+subsection{Feature Alignment}
+
+% We propose a trainable alignment layer that embeds vibration features into word embedding and leverages the LLM generation capabilities. Compared to simply feeding recognition results into a language model, the alignment layer preserves richer feature representations. Moreover, the parameters can be fine-tuned to optimize for word embedding.
+We propose a feature alignment layer to embed vibration features into word embedding, which is an MLP consisting of three linear layers (i.e., $l_1, l_2, l_3$). 
+The weights of alignment layer is $theta_A=[theta_C^{},theta_{l_3}]$, where $theta_C^{}$ is the weights of $l_1 & l_2$ (i.e., two linear classification
+layers in FCN) and $theta_{l_3}$ is the weights of $l_3$.
+We use $l_3$ transforms the output $P$ of $l_2$ into the word embedding $H_v=mathrm{reshape}(l_3(P))$, i.e., 
+begin{equation}
+    P in mathbb{R}^{1 times gamma}
+    stackrel{l_3}{longrightarrow}
+    mathbb{R}^{1 times tau h}
+    stackrel{mathrm{reshape}}{longrightarrow}
+    H_V in mathbb{R}^{tau times  h},
+    label{eqalign}
+end{equation}
+where $tau$ signifies the token length after transformed, $h$ is the hidden size of the LLM.
+
+The weight $theta_{l_3}$ of $l_3$ is initialized from the textual descriptions $K$ of all fault categories by
+begin{equation}
+    K in mathbb{T}^{gamma times 1}
+    stackrel{bf{T}}{rightarrow}
+    mathbb{R}^{gamma times tau}
+    stackrel{bf{E}}{rightarrow}
+    mathbb{R}^{gamma times tau times h}
+    stackrel{mathrm{reshape}}{longrightarrow}
+    theta_{l_3} in mathrm{R}^{gamma times tau h},
+    label{eqget_weight}
+end{equation}
+where $mathbb{T}$ stands for the text domain. $bf{E}$ and $bf{T}$ indicate the embedding layer and tokenizer of the pre-trained LLM, respectively. Using a tokenizer $bf{T}$ and an embedding layer $bf{E}$, we generate a word embedding from $K$, which is then reshaped into the weight matrix $theta_{l_3}$. See Appendix C.3 for more details on initializing weights.
+
+We use the pre-trained Qwen2-1.5B cite{qwen} as our LLM parameterized by $theta_L$, achieving basic human-computer interaction. However, its knowledge of specific domains and generation quality still requires improvement. We used the existing LoRA technique cite{hu2021loralowrankadaptationlarge} and a general pipeline PEFT cite{peft} for simultaneous fine-tuning of the LLM and our proposed alignment layer, which is detailed in Algo. ref{algotraining}. 
+
+%  For training data, due to the scarcity of relevant materials, we leveraged ChatGPT cite{openaiGPT4TechnicalReport2024}, currently a leading model, to generate high-quality responses as ground truth. As shown in the Figure. ref{fig finetuning}, task requirements and ground truth fault labels are input into ChatGPT to obtain high-quality responses as targets. The same requirements and vibration signals are input into BearLLM.  The loss is calculated based on the difference between the two outputs, further optimizing the alignment layer and attention parameters. Through such fine-tuning, we achieved comparable response quality to large parameter models with minimal computational overhead in specific business applications.
+
+section{Experiments}
+
+subsection{Experimental Setup}
+% 我们基于Pytorch 2.3.1实现了提出的算法。所有的模型训练采用AdamW作为优化器，初始学习率设为1e-4并在过程中衰减，batch_size设为1024，最多训练50 epochs。基于公开数据集，我们构建了统一数据集，以评估算法的泛化性能。更多有关训练和构建数据集的信息见附件。
+
+%We train FCN with vibration signals $x_v$ as input and fault labels $L_v$ as target, using cross-entropy loss for fault classification. The training procedure is described in Algorithm ref{algotraining}. The pre-trained weights obtained are subsequently used to initialize BearLLM.
+
+% , with an initial learning rate of $10^{-4}$ that decayed during the process AdamW cite{AdamW} served as the optimizer. A batch size of 1024 was used, and training proceeded for a maximum of 50 epochs.
+
+We implemented the proposed method using PyTorch cite{PyTorch}. Both pre-training and fine-tuning are performed on a single Nvidia RTX 4090 GPU. For pre-training, comparison trials, and ablation experiments, we used AdamW cite{AdamW} as the optimizer, and the batch size was set to 1024 for up to 50 epochs of training. Fine-tuning was performed using the existing PEFT cite{peft} library.
+
+To evaluate the effectiveness of our method, we provide quantitative comparison results for fault diagnosis, ablation of key components, and a user study to assess the quality of language responses. We addressed potential label leakage by dividing the 9 public datasets into a 721 ratio individualy. The training set for the MBHM dataset consists of the concatenated training sets of these individual datasets, ensuring no overlap with their corresponding test sets. Other tasks including anomaly detection, maintenance recommendations, and potential risk analysis can be found in Appendix D.
+
+subsection{Comparison with Fault Diagnosis Methods}
+
+We compared BearLLM with the following fault diagnosis methods. BearFM cite{BFM} and MagNet cite{MagNet} are intended for diagnosing faults under cross-working conditions, while WDCNN cite{WDCNN}, TCNN cite{TCNN}, and QCNN cite{QCNN} are aimed at handling specific working conditions. Detailed descriptions of these methods can be found in Appendix B. To ensure a fair comparison, we re-implement these methods and test them under the same setup in section 5.1. The results are displayed in Tab. ref{tabacc_compare}.
+
+begin{figure}[ht]
+centering
+includegraphics[width=3.3in]{figurestrain_compare.pdf}
+    caption{Accuracy and learning rate trends during training for different models. (a) Replacing the network of BearingFM with FCN resulted in increased accuracy and accelerated convergence. (b) Incorporating DCN into QCNN significantly mitigated overfit. (c) Our proposed method exhibits the fastest convergence and highest accuracy.}
+    vspace{-0.2cm}
+    label{figtrain_compare}
+end{figure}
+
+Our DCN achieves greater accuracy compared to BearingFM cite{BFM} when used with the same FCN (see Fig. ref{figtrain_compare} (a)). The reason for this enhancement is likely due to BearingFM using absolute values after the FFT of the envelope spectrum. This method captures only the amplitude and ignores crucial phase information. In contrast, DCN leverages real-number computations, which help to reduce potential information loss, and operates in less than 20% of the time required by the comparison method. Combining DCN with MagNet cite{MagNet} and utilizing aligned data for fusion augmentation has noticeably improved performance on datasets with substantial distribution differences. 
+
+Reflected in Tab. ref{tabacc_compare}, the three methods (WDCNN, TCNN, QCNN) lacking data augmentation or alignment indicate strong accuracy on some specific datasets. However, their capacity to manage massive distribution differences is restricted when trained on the MBHM dataset. Including DCN eases the marked overfitting in QCNN cite{QCNN}, leading to a substantial improvement in validation accuracy (see Fig. ref{figtrain_compare} (b)). Similarly, adding DCN to both WDCNN cite{WDCNN} and TCNN cite{TCNN} led to higher accuracy. Among all the methods tested, our proposed method achieves the highest accuracy and converges the fastest (within 20 epochs on the MBHM dataset as shown in Fig. ref{figtrain_compare} (c)). 
+
+subsection{Ablation Experiments and Generalization}
+
+begin{table}[H]
+    centering
+    begin{tabular}{crrr}
+    hline
+        $n_f$ & Param. & FLOP & Accuracy  hline
+        6,000 & 0.4013M & 0.0177G & 97.70%  
+        12,000 & 0.5979M & 0.0353G & 98.32%  
+        24,000 & 0.9747M & 0.0704G & 99.02%  
+        48,000 & 1.7448M & 0.1408G & 99.20%  hline
+    end{tabular}
+    caption{Comparison of the number of parameters and FLOP of FCN under different $n_f$ settings as well as the accuracy on the MBHM dataset.}
+    % 修改表格题目，分两句
+    label{tabtarget_length}
+    vspace{-0.2cm}
+end{table}
+
+The tests were carried out using four different $n_f$ settings in DCN (see Eq. ref{eqprepocess_signal}), as depicted in Tab. ref{tabtarget_length}. As vibration information primarily resides in the low-frequency range, cut is unlikely to significantly impact accuracy. By increasing the number of frequency components, the distortion due to cut can be minimized, which enhances the precision on the MBHM dataset; however, this also raises parameters and computation in FCN. To achieve a balance between accuracy and performance, we opt for 24,000 as the $n_f$.
+
+
+
+begin{table}[htbp]
+    centering
+    begin{tabular}{lccc}
+    hline
+        multirow{2}{1.5cm}{Method} & Accuracy & multicolumn{2}{c}{Generalization}  cline{2-4}
+        ~ & MBHM & JUST & IMS  hline
+        Ours & 99.02% & 90.22% & 98.52%  
+        wo DCN & 72.15% & 37.00% & 91.46%  
+        wo $tilde{F}_v, F_{res}$  & 98.35% & 87.52% & 97.81%  
+        wo $F_{res}$  & 98.82% & 87.83% & 97.96% 
+        wo $tilde{F}_v$  & 98.63% & 90.34% & 98.29%   hline
+    end{tabular}
+        caption{A comparison of accuracy and generalization for different ablation setups is presented.}
+    label{tabablation_result}
+    %vspace{-0.2cm}
+end{table}
+
+Ablation studies were conducted to further validate the effectiveness of each component in our proposed method. We evaluated the performance by directly using raw time-domain vibration signals (fixed-length segments) as input and removing fault-free channels and residual channels separately and together.
+
+
+begin{figure}[htbp]
+centering
+includegraphics[width=3.3in]{figurest_sne.pdf}
+    caption{Visualization of output features with t-SNE. (a) Our method demonstrates clear inter-class separability. (b) Removing the fault-free and residual channels results in the signals from the same dataset exhibiting similar features.}
+    label{figtsne}
+    %vspace{-0.5cm}
+end{figure}
+
+Experimental results in Tab. ref{tabablation_result} demonstrate significant accuracy and generalization drops when using time-domain signals only, further highlighting the efficacy of DCN. Applying the t-SNE, we compared the visualization of output with and without fault-free and residual channels. The blue box in Fig. ref{figtsne} (b) shows how signal segments from the same dataset cluster closely in the feature space. This indicates that the model first identifies the dataset type before refining fault classification. Conversely, our proposed method, as shown in Fig. ref{figtsne} (a), reduces inter-dataset differences. The model targets the residual between the query signal segments and the fault-free signal segments, creating a unified feature representation across the varying working conditions, and improving the generalization.
+
+We evaluate the generalization ability of our proposed method using zero-shot settings. Among the publicly available datasets employed, JUST cite{JUST} and IMS cite{IMS} are the largest. We trained on the MBHM(wo JUST&IMS) dataset, comprising only 35% of the MBHM training data, and performed zero-shot tests on the JUST and IMS datasets separately. On the JUST dataset, our method achieves an accuracy of 90.22% without any fine-tuning. In contrast, the method without fault-free and residual channels achieves an accuracy of only 87.54%.
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=7in]{figuresmatrix.pdf}
+    caption{Confusion matrices for zero-shot performance in various scenarios. (a) Our method trained on the MBHM(wo IMS&JUST) and tested on the IMS shows relatively reliable accuracy. (b) The method without fault-free and residual channels trained on the MBHM(wo IMS&JUST) and tested on the IMS displays lower accuracy and a tendency to underestimate severity. (c) Our method trained on the MBHM(wo CWRU) and tested on the CWRU confirms generalization. (d) Our method trained on the MBHM(wo CWRU&XJTU) and tested on the CWRU further verifies the generalization and efficacy of the unified representation.}
+        vspace{-0.35cm}
+    label{figconfusion_matrix}
+end{figure}
+
+Fig. ref{figconfusion_matrix} (a,b) illustrates a comparison of confusion matrices for zero-shot testing on the IMS dataset cite{IMS}, with and without fault-free and residual channels. Given that the IMS dataset is unbalanced (most samples are fault-free), the overall accuracy drops slightly from 98.52% to 97.81%. However, the method without two auxiliary channels tends to grossly underestimate the severity. For example, 61% of severe outer ring faults are classified as moderate, and 23% of moderate outer ring faults are identified as minor.
+
+The CWRU cite{CWRU1} and XJTU cite{XJTU} datasets are the only ones that include all ten types of faults. To confirm the potential to create a unified representation, we trained our model on the MBHM(wo CWRU) and MBHM(wo CWRU&XJTU) datasets, respectively. We then performed zero-shot testing on the commonly used CWRU dataset, with the results of the confusion matrices displayed in Fig. ref{figconfusion_matrix} (c,d). Our method achieves remarkable accuracies of 90.26% and 89.14% on the untrained CWRU dataset for each setting, respectively. This result is even better than some methods trained on CWRU, which shows the generalization of our unified representation method and does not depend on any specific complete dataset for training.
+
+subsection{User Study}
+
+begin{table}[htbp]
+    centering
+    begin{tabular}{lcccc}
+    hline
+    Task & A & B & C & D  hline
+    FCN & 9% & 10% & - & - 
+    wo fine-tune & 44% & 32% & 46% & 45% 
+    BearLLM & textbf{47%} & textbf{58%} & textbf{54%} & textbf{55%}  hline
+    end{tabular}
+    caption{Voting results from user study.  Tasks A-D corresponds to anomaly detection, fault diagnosis, maintenance recommendations, and potential risk analysis. The fine-tuned BearLLM was the most favored across all tasks.}
+    vspace{-0.2cm}
+    label{tabvote_result}
+end{table}
+
+Tab. ref{tabvote_result} summarizes the outcomes of four different tasks, with users choosing the best outputs from FCN, untuned BearLLM, and fine-tuned BearLLM in blind trials. Notably, in simpler tasks, few users chose the fault code output, while most preferred the natural language output. Fig. ref{figfinetune_response} illustrates examples of outputs before and after fine-tuning. Appendix D provides further comparisons for various tasks. Fine-tuning did not significantly affect the output of the simple anomaly detection task. In the fault diagnosis task, the model without fine-tuning sometimes missed information on fault severity, an issue that was resolved with fine-tuning. For the two more complex tasks, the fine-tuned model produced more accurate and detailed responses. Our method addresses the challenge faced by non-experts in utilizing maintenance systems due to their complexity, reducing the required level of expertise.
+
+% Our method leverages LLMs to achieve multi-task responses, providing tailored answers based on user needs and vibration signals. This method addresses the challenge faced by non-experts in utilizing maintenance systems due to their complexity, reducing the required level of expertise. Fine-tuning smaller LLMs using LoRA enables more accurate and detailed responses while facilitating deployment in resource-constrained environments.
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=3.3in]{figuresfinetune_response.pdf}
+    caption{Examples of inputs and outputs of BearLLM. Vibration signals and task requirements are provided as user input, resulting in relevant natural language text output. The fine-tuned BearLLM exhibits improved response quality.}
+    label{figfinetune_response}
+    vspace{-0.2cm}
+end{figure}
+
+section{Conclusion}
+%We present BearLLM, a novel framework for bearing health management that leverages prior knowledge enhancement and utilizes a unified vibration signal representation. This marks the first time LLMs have been employed to achieve integrated implementation of multiple-bearing health management tasks, thereby lowering the required expertise from maintenance personnel. In trials utilizing nine public datasets, our method demonstrated superior accuracy compared to state-of-the-art techniques, even exceeding the performance of methods specifically trained on individual datasets, thereby validating the advantage of our prior knowledge-enhanced unified vibration signal representation. Moreover, our method modules are readily embeddable and improvable within other bearing vibration signal recognition models. We believe that BearLLM not only represents a pioneering exploration of using LLMs to address bearing health management challenges but also offers a superior solution for unified signal representation in other vibration signal processing fields.
+
+We propose BearLLM, a novel multimodal bearing health management framework that is the first attempt to unify multiple bearing-related tasks using LLMs, including anomaly detection, fault diagnosis, maintenance recommendations, and potential risk analysis.
+To build this unified framework, we introduce a prior knowledge-enhanced vibration signal representation for hundreds of different working conditions and construct the first large-scale multimodal bearing health management (MBHM) dataset.
+Experimental results on nine public fault diagnosis datasets show that BearLLM outperforms state-of-the-art methods, even surpassing those specifically trained on individual datasets.
+In addition, our frequency domain input alignment and feature extraction modules are plug-and-play, significantly improving the performance of other fault diagnosis models. 
+We hope our work can inspire future research on building more capable industrial multimodal models.
+
+section{Acknowledgments}
+This work was supported by National Natural Science Foundation of China under grant No. 62073312, Applied Basic Research Program of Liaoning Province (2023JH2101300228, 2023JH2101300143), Natural Science Foundation of Liaoning Province (2022-MS-033).
+
+clearpage
+
+bibliography{aaai25}
+
+clearpage
+section{Appendix}
+
+subsection{A. Construction of MBHM Dataset}
+
+subsubsection{A.1. Vibration Signals}
+
+We perform non-overlapping sampling at equal timing times on nine publicly available datasets, i.e., CWRU cite{CWRU1}, DIRG cite{DIRG}, HIT cite{HIT}, IMS cite{IMS}, JNU cite{JNU1}, JUST cite{JUST}, MFPT cite{MFPT1}, PU cite{PU}, XJTU cite{XJTU}.
+
+begin{figure}[H]
+    centering
+    includegraphics[width=3.3in]{figuressampling.pdf}
+    caption{Sampling method for vibration signals. The vibration signals of each sensor have differences. Each signal sample has an equal duration, based on the sensor sampling rate.}
+    label{figsampling}
+    vspace{-0.4cm}
+end{figure}
+
+These datasets typically involve multiple vibration sensors performing simultaneous signal acquisition. These vibration signals reflect different time-domain characteristics (see Fig. ref{figsampling}) due to differences in sensor designations, mounting locations and orientations. We generalize the different sensors as part of the working conditions, i.e., the same working conditions represent the same sensors, speeds, and loads from the same dataset.
+
+newcommand{cinfo}{C_{texttt{info}}}
+newcommand{clist}{C_{texttt{list}}}
+newcommand{insertarrow}{stackrel{textrm{insert}}{longleftarrow}}
+newcommand{ttrpm}{texttt{rpm}}
+newcommand{ttload}{texttt{load}}
+newcommand{ttsensor}{texttt{sensor}}
+newcommand{comment}{$quadtriangleleftquad$}
+
+begin{algorithm}
+    caption{Obtaining vibration signals from publicly available datasets}
+    label{algovibration}
+    begin{algorithmic}
+
+    REQUIRE $X_o, L_v, s, ttrpm, ttload, ttsensor$ the raw vibration signals, fault labels, sampling rates, speeds, loads, sensor information from publicly available datasets; $D_{1-9}$ the nine publicly available datasets.
+    ENSURE MBHM(Vibration) dataset.
+        STATE $clist=$texttt{[ ]} comment Initialize working conditions list
+        FOR{$D_i$ textbf{in} $D_{1-9}$}
+        FOR{$X_o, L_v, s, ttrpm, ttload, ttsensor$ textbf{in} $D_i$}
+        STATE $cinfo = textbf{string}(ttrpm, ttload, ttsensor, D_i)$
+        IF {$cinfotextbf{ not in }clist$}
+        STATE $clist insertarrow cinfo$ comment new working condition
+        ENDIF
+        STATE $C=textbf{find_index}(cinfo textbf{ in } clist)$
+        STATE $X_v = textbf{sample}(X_o, s)$ comment see Fig. ref{figsampling}
+        STATE MBHM(Vibration) $insertarrow X_v, L_v, C$
+        ENDFOR
+        ENDFOR
+        RETURN MBHM(Vibration)
+    end{algorithmic}
+end{algorithm}
+
+We collected vibration signals $X_v$ and fault labels $L_v$ from these datasets as the vibration signal portion of the MHBM dataset (details in Algo. ref{algovibration}) while abstracting the specific working condition information $cinfo$ into condition index $C$ to facilitate quick indexing of reference vibration signals for the same working conditions.
+
+begin{figure}[H]
+    centering
+    includegraphics[width=3.3in]{figurespie_chart.pdf}
+    caption{Fault types and data sources for the MBHM dataset. (a) MBHM contains the complete set of 10 types, (b) MBHM contains vibration signals from 9 datasets.}
+    label{figpie_chart}
+    vspace{-0.4cm}
+end{figure}
+
+Figure ref{figpie_chart} further illustrates the fault types and data sources for the MBHM dataset. In this case, 54% of the samples are fault-free. The three fault locations (i.e., inner ring, ball, and outer ring) are relatively balanced. Moderate failures accounted for the majority of the three failure levels (i.e., minor, moderate, and severe). More than half of all vibration signal data came from the IMS and JUST datasets.
+
+subsubsection{A.2. Generation of Text Responses}
+For LLMs, the corpus consists of three parts, i.e., system prompts $X_{texttt{sys}}$, user prompts $X_t$, and responses $L_t$. The system prompts and user prompts are taken as inputs and response text is the output of LLM. For all samples, the same system prompt text $X_{texttt{sys}}$ is provided
+
+texttt{small As an expert in bearing fault diagnosis with extensive knowledge in mechanical engineering and failure analysis, you can assess the condition of bearings. Typically, bearing states are categorized as normal, outer ring fault, inner ring fault, and ball fault. These defects are further classified into three levels minor, moderate, and severe. Based on your description of the bearing state, you will answer my questions concisely and directly, providing only the answer without reiterating the user's prompt or bearing status description.}
+
+We provide templates $tilde{X}_t$ for user prompts $X_t$ for each of the four different types of tasks
+
+begin{itemize}
+    item textbf{Anomaly Detection} texttt{small Bearing status descript-
+    ion #placeholder#. Based on the bearing condition description, determine whether the bearing is in a faulty state. Answer yes or no.}
+    item  textbf{Fault Diagnosis }texttt{small Bearing status description #placeholder#. Based on the bearing condition description, identify the type of bearing fault. Bearing conditions are classified as normal, outer ring fault, inner ring fault, and ball fault. All defects are categorized into three levels minor, moderate, and severe.}
+    item textbf{Maintenance Recommendations }texttt{small Bearing status description #placeholder#. Based on the bearing condition description, report the current state of the bearing. If the bearing is in a faulty state, provide targeted maintenance recommendations based on the fault location and severity.}
+    item textbf{Potential Risk Analysis }texttt{small Bearing status descr-
+    iption #placeholder#. Based on the bearing condition description, assess the potential risks associated with the bearing condition. Identify the potential consequences of the bearing fault and recommend appropriate actions to prevent catastrophic failures.}
+end{itemize}
+
+The template $tilde{X}_t$ is embellished and modified using LLMs to simulate different user inputs $X_t$ while maintaining the meaning and not modifying the placeholders. We use the leading ChatGPT cite{openaiGPT4TechnicalReport2024} for response corpus generation. In the generation, texttt{small#placeholder#} is replaced with fault descriptions, according to fault labels $L_v$, e.g., texttt{small moderate fault of bearing outer ring}. 
+We simulated four separate tasks for each sample in the MBHM(Vibration) dataset to generate the MBHM dataset, details of which are given in Algo. ref{algombhm}.
+
+begin{algorithm}
+    caption{Algorithm for building the MBHM dataset}
+    label{algombhm}
+    begin{algorithmic}
+    REQUIRE $X_v, L_v, C$ vibration signal, fault label, working condition from MBHM(Vibration) dataset, $T_{A-D}$ task types, $X_{texttt{sys}}$ system prompt, $tilde{X}_t$ user prompt templates.
+    ENSURE MBHM dataset.
+        FOR{$T textbf{ in } T_{A-D}$}
+        STATE $X_t = textbf{mod}(tilde{X}_t  _T$) comment simulate user inputs
+        STATE $L_t = textbf{ChatGPT}(X_{texttt{sys}},X_t,L_v)$
+        STATE MBHM $insertarrow X_v, L_v, C, X_t, L_t$        
+        ENDFOR
+        RETURN MBHM
+    end{algorithmic}
+end{algorithm}
+
+subsection{B. Differences between Ours and Comparative Methods}
+
+subsubsection{B.1. Methods to Cope with Single Working Condition}
+The main existing fault diagnosis methods are designed for a single working condition only, and we select several representative methods for comparison.
+The textbf{WDCNN} cite{WDCNN} is arguably the most popular diagnostic network, incorporating BatchNorm for fault diagnosis and demonstrating the effectiveness of using larger kernels in the first convolutional layer for improved accuracy. Due to its straightforward architecture, it enjoys widespread application in both practical scenarios and methodological comparisons.
+The textbf{TCNN} cite{TCNN} presents a potential enhancement by adding Dropout techniques and increasing the depth of the network to augment feature learning capabilities from raw data. The textbf{QCNN} cite{QCNN} introduced quadratic convolution to the fault diagnosis domain, improving diagnostic accuracy through enhanced non-linear representational ability within convolutional layers. 
+In contrast to our methods, all of these methods utilize raw vibration signals as input.
+
+subsubsection{B.2. MagNet with Data Augmentation}
+
+The textbf{MagNet} cite{MagNet} enhanced the mixup data augmentation method, transitioning from a Beta distribution (mixing two distributions) to a Dirichlet distribution (mixing multiple distributions).
+During training, in addition to a classification head, a discriminator was designed via adversarial training to render the obtained features difficult for correct source domain identification. This process compelled the feature extractor to learn common features across domains. The authors also introduced a self-adaptive screening weight strategy to mitigate the use of feature-deficient samples in the augmentation sample synthesis. 
+
+Similar to our method, this approach attempts to transform the vibration signal from multiple independent distributions into a smooth single distribution.
+However, our approach achieves alignment through simple spectral changes, whereas MagNet performs signal mixing in the time domain, which made it difficult to perform effective sample mixing in cases with large distributional differences such as our MBHM dataset.
+
+subsubsection{B.3. BearingFM with Data Preprocessing}
+
+The textbf{BearingFM} cite{BFM} employs a resampling strategy to align input signals to the angular domain. This method assumes that the bearing's rotational speed and sampling frequency are known, enabling resampling of the raw signal to a uniform target speed and sampling rate. Subsequently, it utilizes the Hilbert transform and FFT to extract the envelope spectrum of the signal. Finally, further data augmentation is performed through translation and scaling operations on the signal in both the frequency and amplitude axis to model input.
+
+The similarity to our method lies in the use of preprocessing techniques to uniformly represent signals with different sampling rates. However, BearingFM requires more a priori knowledge (the RPM value of the test rig is needed) and performs more complex calculations. What's more, the authors take absolute values after the FFT, resulting in a loss of phase information of the vibration signal.
+
+subsection{C. Details of Experience}
+
+subsubsection{C.1. Details of Experimental Setup}
+
+All training and testing were conducted on a Windows 11 system equipped with a Core i7-13700F CPU and a single RTX 4090 GPU. Python and PyTorch cite{PyTorch} versions utilized were 3.11 and 2.3.1, respectively.
+
+A batch size of 1024 was employed for pre-training, comparison trials, and ablation experiments, with an initial learning rate of $10^{-4}$. AdamW cite{AdamW} served as the optimizer, and the learning rate scheduler was set to ReduceLROnPlateau with parameters patience=150 and factor=0.5. This implies that if the loss did not decrease for consecutive 150 batches, the learning rate would be halved. A maximum of 50 epochs was allowed, and training was considered converged and terminated prematurely if the learning rate fell below $10^{-7}$. Fine-tuning was performed using the existing PEFT cite{peft} library.
+
+subsubsection{C.2. Pre-training}
+
+We use the MBHM dataset to pre-train the Fault Classification Network (FCN). To prevent the problem of data leakage, we first randomly divide the data into training, validation, and testing sets in the ratio of 721, and subsequent query reference signal operations are performed only within the training set. The training set is used to optimize the FCN weights, the validation set is used to evaluate the degree of overfitting of the training accuracy, and the test set is loaded with the validation set weights with the highest accuracy to evaluate the overall accuracy of the model.
+
+subsubsection{C.3. Initialize weights}
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=3.3in]{figuresinit_weigths.pdf}
+    caption{Initialization methods for feature encoder and alignment layer in BearLLM. The pre-trained FCN provides the feature encoder and the weights of $L1$ and $L2$. The weights of $L3$ are obtained from the transformation of the fault text description.}
+    label{figinit_weight}
+    vspace{-0.4cm}
+end{figure}
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=3.3in]{figuresl3_weight.pdf}
+    caption{Initialization method for linear layer 3 weights. Firstly, each fault category is described in the text, and then word embedding is obtained as weights by a pre-trained tokenizer and embedding.}
+    label{figl3_weight}
+    vspace{-0.2cm}
+end{figure}
+
+Using the pre-trained FCN and text descriptions for each fault type, the feature encoder and alignment layer of BearLLM are initialized, as shown in Fig. ref{figinit_weight}. The feature encoder weights are frozen and not involved in fine-tuning, and the alignment layer parameters are trainable. The specific implementation of converting fault text descriptions into weights of $L3$ in the alignment layer is shown in Fig. ref{figl3_weight}.
+
+subsubsection{C.4. Fine-tuning}
+
+We utilize the LoRA technique cite{hu2021loralowrankadaptationlarge} to build LoRA adapters for all linear layers in BearLLM, i.e., the alignment layer and the LLM.
+We modify the embedding of Qwen2 cite{qwen} to automatically replace the text embedding of the texttt{small#placeholder#} in $H_t$ with a vibration word embedding $H_v$ that is encoded and aligned by $X_v$. The replaced word embedding is fed into Qwen2 to get the output.
+We use a generic PEFT pipeline cite{peft} to calculate the difference between the output $Y$ of BearLLM and the provided $L_t$, and update the parameters of the LoRA adapters.
+
+subsection{D. More Experimental Results}
+
+subsubsection{D.1. Selection of $n_f$}
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=3in]{figuresinput_length.pdf}
+    caption{The DCN results contain the percentage change in the energy of the original signal at different $n_f$, by analyzing our MBHM dataset.}
+    label{figtarget_count}
+    vspace{-0.2cm}
+end{figure}
+
+Signals with different sampling rates are converted to aligned representations by the DCN, but the number $n_f$ of frequency components in DCN needs to be specified manually, to normalize the signals to the same input length by pad or cut. We statistically analyze our MBHM dataset by evaluating the proportion of energy of the aligned signal containing the original signal for different $n_f$. The results are shown in Fig. ref{figtarget_count}. The vibration information is mainly concentrated in the low-frequency region, and when $n_f$ reaches a certain value, continuing to increase does not lead to significant distortion improvement.
+
+subsubsection{D.2. False Alarm and Missed Alarm Rates}
+
+begin{table}
+    centering
+    begin{tabular}{lp{2cm}p{2cm}}
+    hline
+        ~ & False Alarm Rate (%) & Missed Alarm Rate (%)  hline
+        WDCNN & 24.8 & 9.4  
+        TCNN & 20.3 & 22.5  
+        QCNN & 23.9 & 8.3 
+        WDCNN+DCN & 8.9 & 3.5 
+        TCNN+DCN & 22.9 & 8.1 
+        QCNN+DCN & 8.4 & 4  
+        MagNet & 13.6 & 30.9 
+        BearingFM & 16.9 & 7.9 
+        MagNet+DCN & 15.7 & 3.2 
+        BearingFM+FCN & 7.4 & 2.5 
+        Ours (DCN+FCN) & 0.7 & 0.3  hline
+    end{tabular}
+    caption{The false alarm rate and the missed alarm rate of different methods on the MBHM dataset.}
+    label{tabfalse_missed_rate}
+end{table}
+
+ Excepte the accuracy, we have also evaluated both the false alarm rate and the missed alarm rate of all the methods on the MBHM dataset, as they are crucial metrics for fault diagnosis systems. As shown in Tab. ref{tabfalse_missed_rate}, our method shows superior performance on both metrics as well.
+
+subsubsection{D.3. Effectiveness of DCN for Alignment}
+
+We verified the validity of the DCN alignment by calculating the residuals, as shown in Fig. ref{figcompare_residual}. We select a pair of reference and query (moderate inner ring fault) signals under the same working condition. The reference signal is sampled at 48 kHz and the query signal is sampled at 12 kHz. Fig. ref{figcompare_residual} (a) illustrates the residuals obtained by direct subtraction. Fig. ref{figcompare_residual} (b) illustrates the residuals obtained by phase subtraction after downsampling the reference signal to 12kHz. Both of them are difficult to reflect the difference between the query signal and the reference signal. Fig. ref{figcompare_residual} (c) demonstrates the residuals obtained by phase subtraction after DCN, reflecting the changes of different frequency components after a fault occurs, independent of the sampling rate difference.
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=3.3in]{figurescompare_residual.pdf}
+    caption{The residuals of the reference and query signals are calculated using different ways. (a) direct subtraction in the time domain, (b) subtraction after downsampling to the same sampling rate, (c) subtraction after alignment via DCN.}
+    label{figcompare_residual}
+    vspace{-0.4cm}
+end{figure}
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=6.5in]{figurest_sne_more.pdf}
+    caption{Visualization of t-SNE tested after training on the MBHM dataset under different ablation settings.}
+    label{figt_sne_more}
+    vspace{-0.3cm}
+end{figure}
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=7in]{figuresconfusion_mat_more.pdf}
+    caption{Confusion matrices for test accuracy on the IMS dataset trained on the MBHM (wo IMS&JUST) dataset at different ablation settings.}
+    label{figconfusion_mat_more}
+    vspace{-0.3cm}
+end{figure}
+
+begin{figure}[H]
+    centering
+    includegraphics[width=3.3in]{figureswo_init.pdf}
+    caption{Missing initialization of the three linear layers of the alignment layer can lead to ineffective identification of the bearing vibration signal state, even after fine-tuning.}
+    label{figwo_init}
+    vspace{-0.3cm}
+end{figure}
+
+subsubsection{D.4. Impact of Reference and Residual Channels}
+
+We complement the experimental results without the residual channel $F_{res}$ and reference channel $tilde{F}_v$. As shown in Fig. ref{figt_sne_more}, without these auxiliary channels, the fault classification accuracy decreases, coming from the fact that the signals from different sources are not converted into a uniform representation, retaining some of the features of the dataset source and potentially reducing the generalizability. This is further demonstrated by 0-shot experiments on the IMS dataset cite{IMS} in  Fig. ref{figconfusion_mat_more}. The confusion matrix suggests that the absence of these auxiliary channels makes the model underestimate the severity of faults, in untrained conditions. Among them, the absence of a residual channel $F_{res}$ has a greater impact on the generalizability, illustrating the validity of our efforts to build a unified representation of the vibration signal through residuals.
+
+
+subsubsection{D.5. Impact of Initializing the Alignment Layer}
+
+We experimentally verified the necessity of initializing the alignment layer using FCN and fault descriptions by removing the initialization steps for $L1$, $L2$, and $L3$, respectively, and implementing fine-tuning with the same settings. The results of the experiments are shown in Fig. ref{figwo_init}, where the BearLLM lacking initialization can only learn the reply mode of the health management tasks, but cannot provide reliable bearing faults based on vibration signals.
+
+
+
+subsubsection{D.6. More Examples of Comparing Responses Before and After Fine-tuning}
+
+begin{figure}[htbp]
+    centering
+    includegraphics[width=6.5in]{figuresreplies.pdf}
+    caption{More response comparisons on four health management tasks, before and after fine-tuning.}
+    label{figmore_response}
+    vspace{-0.4cm}
+end{figure}
+
+As shown in Fig. ref{figmore_response}, we demonstrate a comparison of more responses before and after fine-tuning in the four bearing health management tasks, further illustrating that fine-tuning effectively improves the ability and quality of the responses generated based on user prompt and vibration signals. High-quality responses on specific tasks can also be achieved by using smaller models through fine-tuning, which reduces the computational burden and improves the generation speed.
+
+subsection{E. Limitation and Future Works}
+
+Our approach builds a unified representation of bearing vibration signals based on a priori knowledge enhancement. However, it relies on comparisons via fault-free signals under the same working conditions, which suggests that it cannot handle bearing health management tasks without prior fault-free knowledge. For example, during the equipment acceptance process, no fault-free history exists, only when the equipment acceptance is complete, our method can be used. At the same time, signal comparison requires the same working conditions, so it cannot be applied to devices such as industrial robotic arms, whose working conditions (e.g., speed, load) vary over time because it is difficult to query the same working conditions.
+
+In future work, more bearing health management tasks, such as remaining useful life prediction, can be carried out using the unified representation of vibration signals we have established. This frequency domain transformation can also be extended to more rotating mechanical components such as gears. Our current work utilized ChatGPT to generate text of four simulated health management tasks, and other relevant information provided in the dataset, such as test rig descriptions and bearing designations, could be incorporated into the dataset in the future to generate more targeted text responses. Our current dataset only covers vibration signals and text, and future inputs such as infrared images, currents, torques, and other modalities will further expand the scenarios for use.
+
+Although our method has strong generalization ability and demonstrates high 0-shot accuracy after training on the MBHM dataset, future research related to continuous learning can be conducted to improve the accuracy on unseen datasets. For systems with time-varying working conditions, a series of similar working condition signals, rather than a single sample under the same working condition, can be used as reference inputs in the future.
+
+clearpage
+
+end{document}
