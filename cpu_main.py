@@ -14,23 +14,23 @@ warnings.warn = warn
 logger = logging.getLogger('__main__')
 parser = argparse.ArgumentParser()
 # -------------------------------------------- Input and Output --------------------------------------------------------
-parser.add_argument('--data_path', default='Dataset/UEA/', choices={'Dataset/UEA/', 'Dataset/Segmentation/'},
+parser.add_argument('--data_path', default='Dataset/Oilfield/', choices={'Dataset/UEA/', 'Dataset/Segmentation/', 'Dataset/Oilfield/'},
                     help='Data path')
 parser.add_argument('--output_dir', default='Results',
                     help='Root output directory. Must exist. Time-stamped directories will be created inside.')
 parser.add_argument('--Norm', type=bool, default=False, help='Data Normalization')
-parser.add_argument('--val_ratio', type=float, default=0.5, help="Proportion of the train-set to be used as validation")
+parser.add_argument('--val_ratio', type=float, default=0.1, help="Proportion of the train-set to be used as validation")
 parser.add_argument('--print_interval', type=int, default=10, help='Print batch info every this many batches')
 
 parser.add_argument('--gpu', type=int, default='0', help='GPU index, -1 for CPU')
 parser.add_argument('--seed', default=1234, type=int, help='Seed used for splitting sets')
 
-parser.add_argument("--window_size", default=100, type=float, help="window size")
-parser.add_argument("--num_pip", default=0.5, type=float, help="number of pips")
-parser.add_argument("--processes", default=1, type=int, help="number of processes for extracting shapelets")
-parser.add_argument("--dataset_pos", default=1, type=int, help="number of processes for extracting shapelets")
+parser.add_argument("--window_size", default=200, type=float, help="window size")
+parser.add_argument("--num_pip", default=0.3, type=float, help="number of pips")
+parser.add_argument("--processes", default=32, type=int, help="number of processes for extracting shapelets")
+parser.add_argument("--dataset_pos", default=0, type=int, help="number of processes for extracting shapelets")
 
-parser.add_argument("--is_extract_candidate", default=1, type=int, help="is extract candidate?")
+parser.add_argument("--is_extract_candidate", default=0, type=int, help="is extract candidate?")
 parser.add_argument("--dis_flag", default=1, type=int, help="is extract candidate?")
 args = parser.parse_args()
 
