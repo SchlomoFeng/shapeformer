@@ -9,7 +9,7 @@ import pickle
 
 
 class ShapeletDiscover():
-    def __init__(self, window_size=20, num_pip=0.4, processes=4, len_of_ts=None, dim=1):
+    def __init__(self, window_size=200, num_pip=0.3, processes=32, len_of_ts=None, dim=1):
         self.window_size = window_size
         self.num_pip = num_pip
         self.list_group_ppi = []
