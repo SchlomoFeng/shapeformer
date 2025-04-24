@@ -9,7 +9,7 @@ import pickle
 
 
 class ShapeletDiscover():
-    def __init__(self, window_size=200, num_pip=0.3, processes=32, len_of_ts=None, dim=1):
+    def __init__(self, window_size=50, num_pip=0.1, processes=32, len_of_ts=None, dim=1):
         self.window_size = window_size
         self.num_pip = num_pip
         self.list_group_ppi = []
@@ -231,4 +231,3 @@ class ShapeletDiscover():
 
         time2 = time.time() - time2
         print("window_size: %s - evaluating_time: %s" % (self.window_size, time2))
-
