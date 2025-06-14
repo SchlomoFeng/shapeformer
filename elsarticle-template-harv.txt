@@ -56,7 +56,7 @@
 
 %% Abstract
 \begin{abstract}
-Diagnosing the operating conditions of sucker-rod pumping (SRP) systems is crucial for maintaining operational integrity and optimizing production efficiency. However, real-world industrial applications present significant challenges, particularly from large-scale datasets with inherent class imbalances, where critical but infrequent fault conditions are often overlooked. To address these issues, this paper introduces a novel framework, KSL-HPE-Trans, which integrates a knowledge-enhanced shapelet learning mechanism with a hybrid position encoding Transformer. At the core of our approach is the Knowledge-Enhanced Shapelet Learning (KSL) algorithm, which leverages domain expertise by identifying Prior Knowledge Points (PKPs) corresponding to valve events to efficiently generate high-quality shapelet candidates. To counteract data imbalance, a class-balanced strategy based on information gain is employed to select an equal number of the most discriminative shapelets for each operating condition. The model architecture features a dual-branch Transformer that processes both shapelet-derived difference features from a local block and raw convolutional features from a global block. Furthermore, a Hybrid Position Encoding (HPE) scheme, combining a length-adaptive Absolute Position Encoding (APE) and a learnable Relative Position Encoding (RPE), is introduced to enhance the model's grasp of temporal dependencies. Extensive experiments on a self-constructed large-scale dataset of 100,000 samples and 12 classes demonstrate that our method achieves 90.56\% accuracy and 0.904 F1-score, effectively addressing the challenges posed by imbalanced, large-scale data while offering improved interpretability.
+Diagnosing the working conditions of sucker-rod pumping (SRP) systems is essential for operational integrity and production efficiency. However, industrial applications face challenges from large-scale datasets with significant class imbalances, often leading to the neglect of infrequent yet critical fault conditions. To overcome these issues, we propose the KSL-HPE-Trans framework, which integrates a knowledge-enhanced shapelet learning mechanism with a hybrid position encoding Transformer. The core of our method is the Knowledge-Enhanced Shapelet Learning (KSL) algorithm, which incorporates domain expertise by identifying Prior Knowledge Points (PKPs) from valve events to efficiently generate high-quality shapelet candidates. To mitigate the impact of data imbalance, a class-balanced strategy using information gain selects an equal number of the most discriminative shapelets for each working condition. The model's architecture features a dual-branch Transformer that processes shapelet-derived difference features in a local block and raw convolutional features in a global block. This is enhanced by a Hybrid Position Encoding (HPE) scheme, which combines a length-adaptive Absolute Position Encoding (APE) and a learnable Relative Position Encoding (RPE) to better capture temporal dependencies. On a self-constructed, large-scale dataset with 100,000 samples and 12 classes, our method achieves 90.92\% accuracy and a 0.908 F1-score. The results show that the proposed framework effectively handles the challenges of imbalanced, large-scale data while offering enhanced interpretability.
 \end{abstract}
 
 %% Graphical abstract (Please add your graphical abstract image here)
@@ -348,15 +348,16 @@ OTD & 1,172 & 1.17 \\
 \end{tabular}
 \end{table}
 
-We employed a uniform-scaling strategy to standardize all sample lengths to 250.  This method uniformly resamples the time series to a target length $T_{target}$ from its raw length $T_{raw}$:
+We employed a uniform-scaling strategy to standardize all sample lengths to 250. This method uniformly resamples the time series to a target length $T_{target}$ from its raw length $T_{raw}$:
 \begin{equation}
   x_{scaled}[j] = x_{raw}[\lfloor j \cdot \frac{T_{raw}}{T_{target}} \rfloor]
 \end{equation}
-where $\lfloor \cdot \rfloor$ is the floor function.  We used the raw sample data without normalization during the KSL stage to preserve local patterns and inter-dimensional relationships, deferring normalization to the deep learning stage. 
+where $\lfloor \cdot \rfloor$ is the floor function. We used the raw sample data without normalization during the KSL stage to preserve local patterns and inter-dimensional relationships, deferring normalization to the deep learning stage. 
 
+Moreover, Prior Knowledge Points(PKPs) are recogized and computed by sensors. For each variable(displacement and load), there are 5 PKPs: starting point, standing valve opening point, standing valve closing point, traveling valve opening point and traveling valve closing point. The working processes among these point include: loading, suction, unloading and delivery. 
 \subsection{Experimental Settings}
 \label{sec:ES}
-Experiments were conducted on a server with an AMD EPYC 7551P 32-core CPU, 128 GB RAM, and an NVIDIA GeForce RTX 3090 GPU.  The KSL stage runs on the CPU, while the deep learning stage runs on the GPU.  Training configurations and network architecture are detailed in Table \ref{tab:hyper_config} and Table \ref{tab:net_arch}, respectively. 
+Experiments were conducted on a server with an AMD EPYC 7551P 32-core CPU, 128 GB RAM, and an NVIDIA GeForce RTX 3090 GPU. The KSL stage runs on the CPU, while the deep learning stage runs on the GPU. Training configurations and network architecture are detailed in Table \ref{tab:hyper_config} and Table \ref{tab:net_arch}, respectively. 
 
 \begin{table}[htbp]
 \centering
@@ -368,9 +369,9 @@ Experiments were conducted on a server with an AMD EPYC 7551P 32-core CPU, 128 G
 \hline
 window size   & 25    & learning rate & 0.01 \\
 PKPs          & 10    & weight decay  & 5e-4  \\
-processes     & 48    & dropout       & 0.3   \\
+processes     & 48    & dropout       & 0.1   \\
 parallel size & 8     & batch size    & 128   \\
-              &       & epochs        & 150   \\
+              &       & epochs        & 100   \\
 \hline
 \end{tabular}
 \end{table}
@@ -386,10 +387,10 @@ parallel size & 8     & batch size    & 128   \\
 Input                      & -- & 12 $\times$ 6    & -- \\
 Temporal filter            & Conv2d + BN + GELU    & 1 $\rightarrow$ 48          & -- \\ 
 Spatial filter             & Conv2d + BN + GELU    & 48 $\rightarrow$ 48         & -- \\
-Local Transformer block    & HPE + FFN             & 48 $\rightarrow$ 24         & 0.3 \\
+Local Transformer block    & HPE + FFN             & 48 $\rightarrow$ 24         & 0.1 \\
 Transformer encoder        & 60 $\times$ Linear    & var $\rightarrow$ 128       & -- \\ 
 Positional embeddings      & 3 $\times$ Linear     & 2/127/250 $\rightarrow$ 128 & -- \\
-Global Transformer block   & HPE + FFN             & 128                         & 0.3 \\
+Global Transformer block   & HPE + FFN             & 128                         & 0.1 \\
 Output                     & 2 $\times$ Linear     & 176/128 $\rightarrow$ 12    & -- \\ 
 \hline
 \end{tabular}
@@ -413,17 +414,17 @@ Performance was evaluated using accuracy, precision, recall, F1-score, and the c
 \hline
 \textbf{Metric} & MultiRocket & ConvTran & 4S-TFSM-CNN & \textbf{Proposed} \\
 \hline
-Accuracy (\%)   & 80.58       & 85.93    & 74.32       & \textbf{90.56} \\ 
-Precision (\%)  & 77.42       & 85.67    & 75.08       & \textbf{90.62} \\
-Recall (\%)     & 76.19       & 85.90    & 74.31       & \textbf{90.64} \\ 
-F1-score        & 0.760       & 0.856    & 0.723       & \textbf{0.904} \\
+Accuracy (\%)   & 80.58       & 85.93    & 74.32       & \textbf{90.92} \\ 
+Precision (\%)  & 77.42       & 85.67    & 75.08       & \textbf{90.86} \\
+Recall (\%)     & 76.19       & 85.90    & 74.31       & \textbf{90.91} \\ 
+F1-score        & 0.760       & 0.856    & 0.723       & \textbf{0.908} \\
 \hline
 \end{tabular}
 \end{table*}
 
 \subsection{Performance Evaluation}
 \label{sec:PE}
-To validate the effectiveness of our model, we conducted a comprehensive comparison against state-of-the-art baselines.  As summarized in Table \ref{tab:comparison}, KSL-HPE-Trans achieves a top-tier accuracy of 90.56\%, surpassing the strongest baseline, ConvTran, by 4.63 percentage points.  The model's primary advantage lies in its ability to synergistically leverage both local, discriminative features and global contextual information.  The high F1-score of 0.904, compared to 0.856 for ConvTran, indicates a superior balance between precision and recall, particularly for minority classes—a key challenge motivating this work. 
+To validate the effectiveness of our model, we conducted a comprehensive comparison against state-of-the-art baselines.  As summarized in Table \ref{tab:comparison}, KSL-HPE-Trans achieves a top-tier accuracy of 90.92\%, surpassing the strongest baseline, ConvTran, by 4.63 percentage points.  The model's primary advantage lies in its ability to synergistically leverage both local, discriminative features and global contextual information. The high F1-score of 0.908, compared to 0.856 for ConvTran, indicates a superior balance between precision and recall, particularly for minority classes—a key challenge motivating this work. 
 
 For instance, on the "Oil Too Dense" (OTD) condition, which constitutes only 1.17\% of the dataset, our model maintains high precision and recall, as shown by the focused diagonal in its confusion matrix (Fig.\ref{fig:Conf}(d)).  Unlike the baseline models (Fig.\ref{fig:Conf}(a-c)), our method exhibits fewer misclassifications of minority classes like OTD and WWF into the majority "Regular Work" (RW) class.  This directly demonstrates the efficacy of the KSL module's class-balanced shapelet selection and the local Transformer block in identifying subtle but critical fault signatures. 
 
@@ -452,18 +453,18 @@ Removing either the Absolute Position Encoding (APE) or Relative Position Encodi
 \hline
 \textbf{Metric}   & \textbf{Proposed} & w/o Local & w/o APE   & w/o RPE \\
 \hline
-Accuracy (\%)     & \textbf{90.56}    & 81.86     & 84.99     & 83.53 \\ 
-Precision (\%)    & \textbf{90.62}    & 81.63     & 84.94     & 83.31 \\
-Recall (\%)       & \textbf{90.64}    & 81.92     & 85.02     & 83.52 \\ 
-F1-score          & \textbf{0.904}    & 0.809     & 0.841     & 0.829 \\
+Accuracy (\%)     & \textbf{90.92}    & 81.86     & 84.99     & 83.53 \\ 
+Precision (\%)    & \textbf{90.86}    & 81.63     & 84.94     & 83.31 \\
+Recall (\%)       & \textbf{90.91}    & 81.92     & 85.02     & 83.52 \\ 
+F1-score          & \textbf{0.908}    & 0.809     & 0.841     & 0.829 \\
 \hline
 \end{tabular}
 \end{table}
 
 \subsection{Hyperparameter Sensitivity Analysis}
 \label{sec:Hyper}
+\subsubsection{Number of Shapelet}
 We analyzed the model's sensitivity to the number of top shapelets selected per class, $K$, a critical hyperparameter controlling the richness of the local feature set.  We varied $K$ from 1 to 9 and recorded the model accuracy, plotted in Fig. \ref{fig:shap_analysis}. 
-
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\linewidth]{figure/shapelet_analysis.png}
@@ -472,7 +473,22 @@ We analyzed the model's sensitivity to the number of top shapelets selected per 
 \end{figure}
 
 The plot clearly shows that model performance, measured by accuracy, precision, recall, and F1-score, is optimal at $K=1$. As $K$ increases, all four metrics exhibit a steady and consistent decline. This suggests that a single, highly discriminative pattern per class, as identified by our KSL algorithm, is sufficient for achieving the best classification results. The introduction of additional shapelets ($K>1$) appears to add less informative or potentially redundant patterns, which slightly degrades overall performance. Based on this analysis, we selected $K=1$ for all other experiments to ensure maximum effectiveness.
-
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\linewidth]{figure/dglo_dloc_1.png}
+  \caption{Different embedding size of $d_{glo}$ and $d_{loc}$}
+  \label{fig:dglo_dloc}
+\end{figure}
+\subsubsection{Embedding dimensions}
+Further investigation into hyperparameter sensitivity focused on the embedding dimensions $d_{loc}$ and $d_{glo}$, which govern the feature vector sizes within the Local and Global Transformer Blocks, respectively. These dimensions are pivotal, as they dictate the capacity of each block to encode learned representations. We conducted a series of experiments, systematically varying $d_{loc}$ and $d_{glo}$ and observing the resultant impact on the model's diagnostic accuracy and other relevant metrics. The detailed outcomes of this sensitivity analysis, which will be presented in Fig.\ref{fig:dglo_dloc} , demonstrate how different settings for these dimensions influence the model's ability to capture and integrate both fine-grained local features derived from shapelets and broader contextual information from the entire time series. This analysis is crucial for optimizing the network's architecture, ensuring that $d_{loc}$ and $d_{glo}$ are adequately sized to capture essential information without leading to excessive model complexity or underutilization of the network's representational power.
+\subsubsection{Dropout ratios}
+Finally, we analyzed its sensitivity to the dropout ratios. We tested values ranging from 0.1 to 0.5, and the results are plotted in Fig.\ref{fig:dropout}. The model achieved its peak performance, at the lowest tested dropout rate of 0.1. As the dropout rate was increased, we observed a consistent and monotonic decline in performance across all metrics. This trend suggests that while a mild level of regularization is beneficial, higher dropout ratios begin to excessively constrain the model's learning capacity, leading to underfitting rather than preventing overfitting. Therefore, a dropout rate of 0.1 establishes the optimal balance for this model and dataset.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\linewidth]{figure/dropout.png}
+  \caption{Dropout ratios analysis}
+  \label{fig:dropout}
+\end{figure}
 \subsection{Analysis on Imbalanced and Large-Scale Data}
 \label{sec:Im-Large}
 \begin{figure}[htbp]
@@ -482,14 +498,14 @@ The plot clearly shows that model performance, measured by accuracy, precision, 
   \label{fig:imbalance_analysis}
 \end{figure}
 
-This work was motivated by the dual challenges of data imbalance and scale.  To explicitly evaluate our model's capability in handling imbalanced distributions, we analyzed the per-class F1-scores.  As illustrated in Fig.\ref{fig:imbalance_analysis}, KSL-HPE-Trans consistently outperforms ConvTran, especially on minority classes.  For example, for OTD (1.17\% of data) and DVL (4.00\% of data), our model achieves accuracy of 94.2\% and  respectively, while the baseline struggles to exceed 0.80.  This directly validates the effectiveness of our class-balanced shapelet selection mechanism, which ensures that rare but critical conditions receive adequate representation during feature learning. 
+This work was motivated by the dual challenges of data imbalance and scale.  To explicitly evaluate our model's capability in handling imbalanced distributions, we analyzed the per-class F1-scores.  As illustrated in Fig.\ref{fig:imbalance_analysis}, KSL-HPE-Trans consistently outperforms ConvTran, especially on minority classes.  For example, for OTD (1.17\% of data) and LNE (4.00\% of data), our model achieves accuracy of 96.8\% and 94.0\% respectively, while the baseline struggles to exceed 0.80.  This directly validates the effectiveness of our class-balanced shapelet selection mechanism, which ensures that rare but critical conditions receive adequate representation during feature learning. 
 
 Regarding scalability, traditional shapelet discovery is often computationally prohibitive on datasets of 100,000 instances.  Our KSL algorithm was designed to overcome this. By leveraging pre-defined PKPs to prune the search space and employing a batch-wise parallel processing strategy on a 32-core CPU, the entire shapelet discovery and selection process for the 72,000 training samples was completed in under 2 hours.  This represents a significant efficiency gain, rendering our approach practical for real-world, large-scale industrial applications. 
-
+s
 \section{Conclusion}
-This paper addressed the critical challenges of class imbalance, large data scale, and interpretability in the diagnosis of sucker-rod pumping system operating conditions.  We introduced a novel and effective framework, KSL-HPE-Trans, which synergistically combines domain knowledge-guided shapelet learning with a powerful hybrid position encoding Transformer architecture.  Our Knowledge-Enhanced Shapelet Learning (KSL) algorithm successfully leverages Prior Knowledge Points (PKPs) to vastly improve the efficiency and interpretability of feature extraction.  Complemented by a class-balanced selection strategy, our model demonstrates a strong capability to identify rare but critical fault conditions often missed by conventional models.  The dual-branch Transformer, processing both local shapelet-derived features and global raw features, coupled with our bespoke Hybrid Position Encoding (HPE), ensures a comprehensive analysis of complex time series data. 
+This paper addressed the challenges of class imbalance and large data scale in the diagnosis of sucker-rod pumping system working conditions.  We introduced a novel and effective framework, KSL-HPE-Trans, which synergistically combines domain knowledge-enhanced shapelet learning with a hybrid position encoding Transformer architecture.  Our Knowledge-Enhanced Shapelet Learning (KSL) algorithm successfully leverages Prior Knowledge Points (PKPs) to vastly improve the efficiency and interpretability of feature extraction.  Complemented by a class-balanced selection strategy, our model demonstrates a strong capability to identify rare but critical fault conditions often missed by conventional models.  The dual-branch Transformer, processing both local shapelet-derived features and global raw features, coupled with our bespoke Hybrid Position Encoding (HPE), ensures a comprehensive analysis of complex real-world data. 
 
-Experimental results on a large-scale industrial dataset validate our approach.  Our method achieved a state-of-the-art accuracy of 90.56\%, significantly outperforming various baseline methods.  More importantly, it showed marked improvements in the recognition of minority classes and demonstrated remarkable computational efficiency, making it highly suitable for practical deployment in real-world oilfields. 
+Experimental results on a large-scale industrial dataset validate our approach.  Our method achieved a state-of-the-art accuracy of 90.92\%, significantly outperforming various baseline methods.  More importantly, it showed marked improvements in the recognition of minority classes and demonstrated remarkable computational efficiency, making it highly suitable for practical deployment in real-world oilfields. 
 
 While our PKP-based approach is highly effective for SRP systems, future work could explore semi-supervised or automated methods for identifying these key points in other industrial domains where explicit prior knowledge is less accessible.  Further research could also investigate the dynamic optimization of hyperparameters and the adaptation of the framework for online, real-time diagnostic applications.  Overall, this work provides a robust and practical solution for intelligent fault diagnosis in the oil production industry and offers a valuable methodological reference for other large-scale industrial time series analysis tasks. 
 
@@ -607,5 +623,3 @@ Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H., Zhang, W., 2024. A 
 \endinput
 %%
 %% End of file `elsarticle-template-harv.tex'.
-
-
